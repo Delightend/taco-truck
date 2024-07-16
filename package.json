@@ -7,13 +7,19 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^6.0.0-alpha.14",
+    "@types/mui-image": "^1.0.5",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
+    "axios": "^1.7.2",
+    "mui-image": "^1.0.7",
     "react": "latest",
     "react-dom": "latest",
     "react-router": "^6.24.1",
     "react-router-dom": "^6.24.1",
     "react-scripts": "latest",
+    "react-swipeable-views": "^0.14.0",
     "typescript": "latest"
   },
   "scripts": {
@@ -33,5 +39,26 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.10",
+    "@types/react-swipeable-views": "^0.13.5",
+    "@types/requirejs": "^2.1.37",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^31.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.34.4",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "file-loader": "^6.2.0",
+    "prettier": "2.8.3",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.93.0"
   }
 }
