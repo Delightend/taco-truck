@@ -11,12 +11,15 @@ import { CartItemType } from './types/CartItemType';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
+  const cartItemsStorage = JSON.parse(localStorage.getItem("cartItems") || '');
 
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
+  
   const handleAddToCart = (clickedItem: CartItemType) => {
+    setCartItems(cartItemsStorage);
     setCartItems((prev) => {
       const isItemInCart = prev.find((item) => item.id === clickedItem.id);
 
@@ -33,8 +36,7 @@ export default function App() {
   };
 
   const handleRemoveFromCart = (id: string) => {
-    console.log('the id to remove is:', id);
-    console.log('items are: ', cartItems);
+    setCartItems(cartItemsStorage);
     setCartItems((prev) =>
       prev.reduce((acc, item) => {
         if (item.id === id) {
@@ -45,8 +47,8 @@ export default function App() {
         }
       }, [] as CartItemType[])
     );
-    console.log('items are: ', cartItems);
   };
+
   return (
     <Container maxWidth={false} disableGutters={true}>
       <Box sx={{ flexGrow: 1 }}>
@@ -54,7 +56,7 @@ export default function App() {
         <Container maxWidth={false} sx={{overflowY: 'scroll'}}>
           <Routes>
             <Route path='/' element={<Home addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart} />} />
-            <Route path='/Cart' element={<Cart cartItems={cartItems} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart} />} />
+            <Route path='/Cart' element={<Cart addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart} />} />
           </Routes>
         </Container>
       </Box>
