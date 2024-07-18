@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CartItemType } from "../types/CartItemType";
 import CartItemComponent from "./CartItem";
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 type CartProps = {
   addToCart: (clickedItem: CartItemType) => void;
@@ -16,7 +16,6 @@ export default function Cart({
 }: CartProps) {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [customerName, setCustomerName] = useState<string>('');
-  const [orderResponse, setOrderResponse] = useState<AxiosResponse>();
   
   useEffect(() => {
     const cartItemsStorage = JSON.parse(localStorage.getItem("cartItems") || '');
@@ -38,12 +37,11 @@ export default function Cart({
       .then(function (response) {
         console.log(response);
         localStorage.setItem('cartItems', '[]');
-        setOrderResponse(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-    }
+  }
 
   useEffect(() => {
   }, []);
@@ -51,38 +49,38 @@ export default function Cart({
   return (
     <>
       <Typography variant='h3'>Your Cart</Typography>
-      {cartItems.length === 0 ? <Typography>No items in cart.</Typography> : 
-        <>
-          <Typography variant='h4'>Total: ${runningTotal.toFixed(2)}</Typography>
-          <TextField
-            id="outlined-basic"
-            label="Your Name"
-            variant="outlined"
-            name={customerName}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setCustomerName(event.target.value);
-            }}
-          />
-          <Button color='success'
-            variant='contained'
-            onClick={handleSubmit}
-            type='submit'
-          >
-            Check Out
-          </Button>
-          <Grid container spacing={2}>
-            {cartItems.map((item) => (
-              <Grid item xs={6}>
-                <CartItemComponent
-                  key={item.id}
-                  item={item}
-                  addToCart={addToCart}
-                  removeFromCart={removeFromCart}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </>
+      {cartItems.length === 0 ? <Typography>No items in cart.</Typography> :  
+          <>
+            <Typography variant='h4'>Total: ${runningTotal.toFixed(2)}</Typography>
+            <TextField
+              id="outlined-basic"
+              label="Your Name"
+              variant="outlined"
+              name={customerName}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setCustomerName(event.target.value);
+              }}
+            />
+            <Button color='success'
+              variant='contained'
+              onClick={handleSubmit}
+              type='submit'
+            >
+              Check Out
+            </Button>
+            <Grid container spacing={2}>
+              {cartItems.map((item) => (
+                <Grid item xs={6}>
+                  <CartItemComponent
+                    key={item.id}
+                    item={item}
+                    addToCart={addToCart}
+                    removeFromCart={removeFromCart}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </>
       }
     </>
   );
